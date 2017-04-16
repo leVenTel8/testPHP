@@ -1,0 +1,49 @@
+<!-- Всталяем табличку с прайс-листом <!DOCTYPE html>-->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> Проверка формы</title>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+			$("#login").blur(function(){
+				var data = $("#login").val();
+				if(data != ''){
+					$.ajax({
+						url: 'check.php',
+						type: 'POST',
+						data: {login: data},
+						success: function(res){
+							$("#login").next().text(res);
+						},
+						error: function(){
+							$("#login").next().text('Ошибка');
+						}
+					});
+				}else{
+
+				}
+			});
+		});
+
+	</script>
+
+</head>
+
+<body>
+	
+	<form>
+		<label for="login">Логин: </label>
+		<span></span><input type="text" name="login" id="login" /><span></span>
+		<br /><br />
+
+		<label for="pass">Пароль: </label>
+		<input type="password" name="pass" id="pass" />
+		<br /><br />
+	</form>
+
+</body>
+
+</html>
